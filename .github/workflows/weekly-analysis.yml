@@ -10,17 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
+
       - run: pip install -r requirements.txt
+
       - run: python analyze_nfl_spreads.py
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-      uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      # ... previous steps ...
+
       - name: Commit and push analysis artifacts
         run: |
           git config user.name "Auto-Analyzer"
