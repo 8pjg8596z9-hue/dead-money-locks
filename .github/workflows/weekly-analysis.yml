@@ -20,6 +20,6 @@ jobs:
       - run: |
           git config user.name "Auto-Analyzer"
           git config user.email "auto@github.com"
-          git add full_analysis.csv pattern_plot.png
+          git add -f full_analysis.csv pattern_plot.png
           git commit -m "Weekly update: $(date)" || exit 0
           git push
