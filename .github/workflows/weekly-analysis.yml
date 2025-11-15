@@ -17,9 +17,14 @@ jobs:
       - run: python analyze_nfl_spreads.py
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-      - run: |
+      uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      # ... previous steps ...
+      - name: Commit and push analysis artifacts
+        run: |
           git config user.name "Auto-Analyzer"
           git config user.email "auto@github.com"
           git add -f full_analysis.csv pattern_plot.png
-          git commit -m "Weekly update: $(date)" || exit 0
-          git push
+          git commit -m "Weekly update: $(date)" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/8pjg8596z9-hue/dead-money-locks.git HEAD:main
