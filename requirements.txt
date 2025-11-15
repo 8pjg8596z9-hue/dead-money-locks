@@ -1,0 +1,8 @@
+pandas
+nfl_data_py
+requests
+matplotlib
+seaborn
+scikit-learn
+joblib
+python-dotenv
